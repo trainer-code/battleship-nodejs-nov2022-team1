@@ -93,14 +93,14 @@ export class Game {
     }
 
     showHit() {
-        console.log('                \         .  ./');
-        console.log('              \      .:"";\'.:..""   /');
-        console.log('                  (M^^.^~~:.\'"").');
-        console.log('            -   (/  .    . . \ \)  -');
-        console.log('               ((| :. ~ ^  :. .|))');
-        console.log('            -   (\- |  \ /  |  /)  -');
-        console.log('                 -\  \     /  /-');
-        console.log('                   \  \   /  /');
+        console.log("          _ ._  _ , _ ._");
+        console.log("        (_ ' ( `  )_  .__)");
+        console.log("      ( (  (    )   `)  ) _)");
+        console.log("     (__ (_   (_ . _) _) ,__)");
+        console.log("         `~~`\\ ' . /`~~`");
+        console.log("              ;   ;        ");
+        console.log("              /   \\");
+        console.log("_____________/_ __ \\_____________");
     }
 
     askShotQuestion(rl: any, question: string): Promise<string> {
