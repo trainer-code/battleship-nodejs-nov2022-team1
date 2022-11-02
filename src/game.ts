@@ -76,7 +76,7 @@ export class Game {
     }
 
     showStartGameSplash() {
-        console.log("\n\x1b[34m%s","\'.  \\ | /  ,\'");
+        console.log("\n\x1b[33m%s","\'.  \\ | /  ,\'");
         console.log("  `. `.\' ,\'");
         console.log(" ( .`.|,\' .)");
         console.log("%s\x1b[0m"," - ~ -0- ~ -");
@@ -87,7 +87,7 @@ export class Game {
     }
 
     showHit() {
-        console.log("\n\x1b[31m%s", "          _ ._  _ , _ ._");
+        console.log("\n\x1b[32m%s", "          _ ._  _ , _ ._");
         console.log("        (_ ' ( `  )_  .__)");
         console.log("      ( (  (    )   `)  ) _)");
         console.log("     (__ (_   (_ . _) _) ,__)");
