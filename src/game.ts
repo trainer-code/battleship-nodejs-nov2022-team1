@@ -52,7 +52,7 @@ export class Game {
         // initialise PatrolBoat'
         await this.getValidAnswer(rl, ShipLetter.B, 'Enter Patrol boat positions (size = 2) (i.e B2, B3): ', 2);
 
-        console.log('Player, this is your board:');
+        console.log('\nPlayer, this is your board:');
         console.log(this.playerBoard.serialiseBoard());
 
         rl.close();
@@ -76,10 +76,10 @@ export class Game {
     }
 
     showStartGameSplash() {
-        console.log('\'.  \\ | /  ,\'');
-        console.log('  `. `.\' ,\'');
-        console.log(' ( .`.|,\' .)');
-        console.log(' - ~ -0- ~ -');
+        console.log("\n\x1b[34m%s","\'.  \\ | /  ,\'");
+        console.log("  `. `.\' ,\'");
+        console.log(" ( .`.|,\' .)");
+        console.log("%s\x1b[0m"," - ~ -0- ~ -");
     }
 
     consoleBeep() {
@@ -87,14 +87,14 @@ export class Game {
     }
 
     showHit() {
-        console.log("          _ ._  _ , _ ._");
+        console.log("\n\x1b[31m%s", "          _ ._  _ , _ ._");
         console.log("        (_ ' ( `  )_  .__)");
         console.log("      ( (  (    )   `)  ) _)");
         console.log("     (__ (_   (_ . _) _) ,__)");
         console.log("         `~~`\\ ' . /`~~`");
         console.log("              ;   ;        ");
         console.log("              /   \\");
-        console.log("_____________/_ __ \\_____________");
+        console.log("%s\x1b[0m", "_____________/_ __ \\_____________");
     }
 
     askShotQuestion(rl: any, question: string): Promise<string> {
@@ -136,25 +136,34 @@ export class Game {
             output: process.stdout
         });
 
+        const playerColour = "\x1b[32m";
+        const computerColour = "\x1b[31m";
+
         while (true) {
-            console.log("Player, it's your turn");
+            console.log(`${playerColour}%s\x1b[0m`, "Player, it's your turn");
             const shotPosition = await this.getValidShotAnswer(rl, 'Enter coordinates for your shot (i.e B3): ');
             
             const isHit = this.computerBoard.tryHitAShip(this.createShot(shotPosition));
             if (isHit) {
                 this.showHit();
-                console.log('Yeah ! Nice hit !');
+                console.log(`${playerColour}%s\x1b[0m`, "Yeah ! Nice hit !");
             } else {
-                console.log('Miss');
+                this.showStartGameSplash();
+                console.log(`${playerColour}%s\x1b[0m`, "Miss");
             }
+            console.log();
 
             const randomPosition = this.playerBoard.getRandomPosition();
             const isComputerHit = this.playerBoard.tryHitAShip(this.createShot(randomPosition));
             if (isComputerHit) {
                 this.showHit();
             } 
+            else {
+                this.showStartGameSplash();
+            }
 
-            console.log(`Computer shot in ${randomPosition} and ${isComputerHit ? 'has hit your ship !' : 'miss'}`);
+            console.log(`${computerColour}Computer shot in ${randomPosition} and ${isComputerHit ? 'has hit your ship !' : 'miss'}\x1b[0m`);
+            console.log();
 
             
         }
@@ -167,7 +176,6 @@ export async function playBattleFieldGame()  {
     const game = new Game();
     game.showGameSplash();
     await game.initialisePlayerBoard();
-    game.showStartGameSplash();
     await game.playGame();
 }
 
