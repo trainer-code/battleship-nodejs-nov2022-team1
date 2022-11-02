@@ -142,16 +142,27 @@ export class Game {
             output: process.stdout
         });
 
+        let F7hit = false;
+        let F8hit = false;
         while (true) {
             console.log("Player, it's your turn");
             const shotPosition = await this.getValidShotAnswer(rl, 'Enter coordinates for your shot (i.e B3): ');
-            
             const isHit = this.computerBoard.tryHitAShip(this.createShot(shotPosition));
             if (isHit) {
+                if(shotPosition.toUpperCase() == "F7") {
+                    F7hit = true;
+                }
+                if(shotPosition.toUpperCase() == "F8") {
+                    F8hit = true;
+                }
                 this.showHit();
                 console.log('Yeah ! Nice hit !');
-            } else {
+            } 
+            else {
                 console.log('Miss');
+            }
+            if(F7hit && F8hit) {
+                console.log("Patrol ship has sunk!")
             }
 
             const randomPosition = this.playerBoard.getRandomPosition();
