@@ -144,10 +144,13 @@ export class Game {
 
         let F7hit = false;
         let F8hit = false;
+        let playerShotArray = [];
         while (true) {
             console.log("Player, it's your turn");
             const shotPosition = await this.getValidShotAnswer(rl, 'Enter coordinates for your shot (i.e B3): ');
             const isHit = this.computerBoard.tryHitAShip(this.createShot(shotPosition));
+            playerShotArray.push(shotPosition);
+            console.log(playerShotArray);
             if (isHit) {
                 if(shotPosition.toUpperCase() == "F7") {
                     F7hit = true;

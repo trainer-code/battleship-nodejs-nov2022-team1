@@ -144,7 +144,7 @@ export class GameBoard {
     return parts;
   }
 
-  serialiseBoard(): string {
+serialiseBoard(): string {
     const allShipParts = this.getAllShipParts();
 
     const serialiseBoardFunc = (boardStr: string, gameShips: GameBoardShips, boardLetter: ShipLetter, letterRow: number, i: number): string => {
