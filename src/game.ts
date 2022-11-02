@@ -64,28 +64,22 @@ export class Game {
         console.log('                                     ---');
         console.log('                                     / | [');
         console.log('                              !      | |||');
-        console.log('                            _/|     _/|-++\'');
+        console.log('                            _/|     _/|-++\\\'');
         console.log('                        +  +--|    |--|--|_ |-');
-        console.log('                     { /|__|  |/\__|  |--- |||__/');
-        console.log('                    +---------------___[}-_===_.\'____                 /\"');
-        console.log('                ____`-\' ||___-{]_| _[}-  |     |_[___\==--            \/   _');
-        console.log(' __..._____--==/___]_|__|_____________________________[___\==--____,------\' .7');
-        console.log('|                        Welcome to Battleship                         BB-61/');
+        console.log('                     { /|__|  |/\\__|  |--- |||__/');
+        console.log('                    +---------------___[}-_===_.\\\'____');
+        console.log('                ____`-\' ||___-{]_| _[}-  |     |_[___\\==--');
+        console.log(' __..._____--==/___]_|__|_____________________________[___\\==--____,--------.7');
+        console.log('|                        Welcome to Battleship                        BB-61 /');
         console.log(' \\_________________________________________________________________________|');
         console.log();
     }
 
     showStartGameSplash() {
-        console.log('                  __');
-        console.log('                 /  \"');
-        console.log('           .-.  |    |');
-        console.log('   *    _.-\'  \  \__/');
-        console.log('    \.-\'       \"');
-        console.log('   /          _/');
-        console.log('  |      _  /\"\"');
-        console.log('  |     /_\'');
-        console.log('   \    \_/');
-        console.log('    """"""""');
+        console.log('\'.  \\ | /  ,\'');
+        console.log('  `. `.\' ,\'');
+        console.log(' ( .`.|,\' .)');
+        console.log(' - ~ -0- ~ -');
     }
 
     consoleBeep() {
