@@ -145,13 +145,24 @@ export class Game {
         let F7hit = false;
         let F8hit = false;
         let playerShotArray = [];
+        let computerboard: GameBoard;
+        let controlPatrolCounter = 0;
+        let controlDestroyer = 0;
+        let controlSubmarine = 0;
+        let controlAircraft = 0;
+        let controlBattleship = 0;
         while (true) {
             console.log("Player, it's your turn");
+            
             const shotPosition = await this.getValidShotAnswer(rl, 'Enter coordinates for your shot (i.e B3): ');
             const isHit = this.computerBoard.tryHitAShip(this.createShot(shotPosition));
+            
             playerShotArray.push(shotPosition);
             console.log(playerShotArray);
             if (isHit) {
+                // if (this.computerBoard.getAllShipParts().find(el => el.letter === shotPosition.letter && el.index === shotPosition.index)
+                console.log("hello")
+                console.log(this.computerBoard.getAllShipParts().find(l => l.letter == this.createShot(shotPosition).letter))
                 if(shotPosition.toUpperCase() == "F7") {
                     F7hit = true;
                 }
@@ -159,7 +170,7 @@ export class Game {
                     F8hit = true;
                 }
                 this.showHit();
-                console.log('Yeah ! Nice hit !');
+                console.log('Yeah! Nice hit!');
             } 
             else {
                 console.log('Miss');
@@ -176,11 +187,14 @@ export class Game {
 
             console.log(`Computer shot in ${randomPosition} and ${isComputerHit ? 'has hit your ship !' : 'miss'}`);
 
+            // console.log(this.computerBoard.getAllShipParts())
+
             
         }
 
         rl.close();
     }
+
 }
 
 export async function playBattleFieldGame()  {
