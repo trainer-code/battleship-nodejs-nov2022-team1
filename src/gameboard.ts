@@ -97,7 +97,7 @@ export const isValidPosition = (positionStr: string, ships: GameBoardShips, firs
     });
   }
 
-console.log(noOverlap);
+  //console.log(noOverlap);
 
   return validPosition && noOverlap && sameAxis;
 };
