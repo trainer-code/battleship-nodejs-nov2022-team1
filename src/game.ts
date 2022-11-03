@@ -1,5 +1,5 @@
 import * as readline from 'readline';
-import { GameBoard, isValidPosition, computerBoard } from './gameboard';
+import { GameBoard, isValidShotPosition, computerBoard } from './gameboard';
 import { ShipLetter, Letter } from './enums';
 import { Shot } from './interfaces';
 
@@ -50,7 +50,7 @@ export class Game {
         // initialise Destroyer',
         await this.getValidAnswer(rl, ShipLetter.D, 'Enter Destroyer positions (size = 3) (i.e B2, B3): ', 3);
         // initialise PatrolBoat'
-        await this.getValidAnswer(rl, ShipLetter.B, 'Enter Patrol boat positions (size = 2) (i.e B2, B3): ', 2);
+        await this.getValidAnswer(rl, ShipLetter.P, 'Enter Patrol boat positions (size = 2) (i.e B2, B3): ', 2);
 
         console.log('\nPlayer, this is your board:');
         console.log(this.playerBoard.serialiseBoard());
@@ -102,7 +102,7 @@ export class Game {
             rl.question(question, (userEntry: string) => {
                 try {
                     const shotPosition = userEntry.trim();
-                    if (isValidPosition(shotPosition)) {
+                    if (isValidShotPosition(shotPosition)) {
                         resolve(shotPosition);
                     } else {
                         reject('Invalid position!');
