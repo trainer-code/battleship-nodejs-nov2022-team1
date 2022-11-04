@@ -70,7 +70,7 @@ export class Game {
         console.log('                    +---------------___[}-_===_.\\\'____');
         console.log('                ____`-\' ||___-{]_| _[}-  |     |_[___\\==--');
         console.log(' __..._____--==/___]_|__|_____________________________[___\\==--____,--------.7');
-        console.log('|                        Welcome to Battleship                        BB-61 /');
+        console.log('|                        Welcome to Battleship                        ollie /');
         console.log(' \\_________________________________________________________________________|');
         console.log();
     }
