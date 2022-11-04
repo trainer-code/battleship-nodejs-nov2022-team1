@@ -181,7 +181,9 @@ export class GameBoard {
   }
 
   tryHitAShip(shot: Shot) {
+    // Keeps track of shots taken
     const hitPart = this.getAllShipParts().find(el => el.letter === shot.letter && el.index === shot.index);
+    // console.log(hitPart);
     if (hitPart) {
       hitPart.isHit = true;
       return true;
@@ -201,7 +203,7 @@ export class GameBoard {
     return parts;
   }
 
-  serialiseBoard(): string {
+serialiseBoard(): string {
     const allShipParts = this.getAllShipParts();
 
     const serialiseBoardFunc = (boardStr: string, gameShips: GameBoardShips, boardLetter: ShipLetter, letterRow: number, i: number): string => {
@@ -245,3 +247,4 @@ export class GameBoard {
     return LETTERS[letterIndex] + (index + 1);
   }
 }
+
