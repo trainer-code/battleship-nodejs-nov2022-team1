@@ -32,6 +32,11 @@ Execute all tests
 npm run test
 ```
 
+## Run Cucumber
+```
+./node_modules/.bin/cucumber-js -p default
+```
+
 ## Docker
 
 To run and test the project in a container, use these steps:
