@@ -63,9 +63,10 @@ export class GameBoard {
     let validPosition = positionStr.length === 2 && LETTERS.indexOf(positionStr[0].toUpperCase()) > -1 && Number(positionStr[1]) <= BOARD_SIZE;
     let noOverlap = true;
     let sameAxis = positionStr.length === 2 ? positionStr[0] == firstCoord[0] || positionStr[1] == firstCoord[1] : false;
-    let prevLetterCoord = String.fromCharCode(positionStr.charCodeAt(0)-1) + positionStr[1].toString();
-    let prevIndexCoord = positionStr[0] + (parseInt(positionStr[1])-1).toString();
+    let prevLetterCoord = positionStr.length === 2 ? String.fromCharCode(positionStr.charCodeAt(0)-1) + positionStr[1].toString() : false;
+    let prevIndexCoord = positionStr.length === 2 ? positionStr[0] + (parseInt(positionStr[1])-1).toString() : false;
     let nextTo = prevCoord == "" ? true : prevCoord == prevLetterCoord || prevCoord == prevIndexCoord;
+    let notNegativeCoord = positionStr.length === 2 ? positionStr.charCodeAt(0) > 65 && parseInt(positionStr[1]) > 0 : false;
   
     // console.log(nextTo);
     // console.log(prevLetterCoord);
@@ -112,7 +113,7 @@ export class GameBoard {
     }
   
   
-    return validPosition && noOverlap && sameAxis && nextTo;
+    return validPosition && noOverlap && sameAxis && nextTo && notNegativeCoord;
   };
 
   parseShipPart(letterRow: number, i: number): ShipPart {
