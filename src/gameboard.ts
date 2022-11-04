@@ -128,7 +128,6 @@ export class GameBoard {
     const hitPart = this.getAllShipParts().find(el => el.letter === shot.letter && el.index === shot.index);
     // console.log(hitPart);
     if (hitPart) {
-      console.log("If statement");
       hitPart.isHit = true;
       return true;
     }
