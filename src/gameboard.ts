@@ -54,11 +54,8 @@ export const isValidPosition = (positionStr: string, ships: GameBoardShips, firs
   let noOverlap = true;
   let sameAxis = positionStr.length === 2 ? positionStr[0] == firstCoord[0] || positionStr[1] == firstCoord[1] : false;
 
-  //console.log(ships.aircraftCarrier.length);  
-  //console.log(positionStr);
   if (ships.aircraftCarrier.length > 0) {
     ships.aircraftCarrier.forEach((ship) => {
-      //console.log('concatenate' + ship.letter + ship.index.toString());
       if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
         noOverlap = false;
       }
@@ -97,7 +94,6 @@ export const isValidPosition = (positionStr: string, ships: GameBoardShips, firs
     });
   }
 
-  //console.log(noOverlap);
 
   return validPosition && noOverlap && sameAxis;
 };
