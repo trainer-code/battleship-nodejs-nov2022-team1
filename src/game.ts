@@ -117,16 +117,10 @@ export class Game {
     async getValidShotAnswer(rl: any, question: string) {
         try {
             const result = await this.askShotQuestion(rl, question);
-            if (rl == '?') {
-                // if (bolPB) {
-                //     console.log("Patrol Boat")
-                // }
-
-            }
             return result;
         } catch (err) {
             console.log("Invalid shot");
-            return await this.getValidShotAnswer(rl, question)
+            return await this.getValidShotAnswer(rl, question);
         }
     }
 
@@ -142,107 +136,22 @@ export class Game {
             output: process.stdout
         });
 
-
-        let playerShotArray = [];
-        let controlPatrolCounter = 0;
-        let controlDestroyer = 0;
-        let controlSubmarine = 0;
-        let controlAircraft = 0;
-        let controlBattleship = 0;
-        let totalHits = 0;
-        let totalComputerHits = 0;
-        let aliveBoats = ["Patrol Boat", "Submarine", "Aircraft Carrier", "Battleship", "Destroyer"];
-
-        while (true) {
-            console.log("Player, it's your turn");
-
         const playerColour = "\x1b[32m";
         const computerColour = "\x1b[31m";
 
         while (true) {
             console.log(`${playerColour}%s\x1b[0m`, "Player, it's your turn");
             const shotPosition = await this.getValidShotAnswer(rl, 'Enter coordinates for your shot (i.e B3): ');
-
             
-            const shotPosition = await this.getValidShotAnswer(rl, 'Enter coordinates for your shot (i.e B3): ');
             const isHit = this.computerBoard.tryHitAShip(this.createShot(shotPosition));
-
-            
-            playerShotArray.push(shotPosition);
             if (isHit) {
-                const pos = this.computerBoard.getAllShipParts().find(l => l.letter == this.createShot(shotPosition).letter && l.index == this.createShot(shotPosition).index)
                 this.showHit();
-
-
-                totalHits++         //Increment game hits
-
-                console.log('Yeah! Nice hit!');
-
-                //Case Statement to increment ship hit counter, and print sink if satisfied
-                switch (pos.shipLetter) {
-                    case 'P':
-                        controlPatrolCounter ++;
-                        if (controlPatrolCounter == 2) {
-                            console.log("Patrol Boat Sunk!!!! BOOOMMMMMMMMM")
-                            const validNamesPB = aliveBoats.indexOf("Patrol Boat")
-                            aliveBoats.splice(validNamesPB, 1)
-                            console.log("Remaining Ships: ", aliveBoats)
-                        }
-                        break;
-                    case 'D':
-                        controlDestroyer ++;
-                        if (controlDestroyer == 3) {
-                            console.log("Destroyer Sunk!!!! BOOOMMMMMMMMM")
-                            const validNamesPB = aliveBoats.indexOf("Destroyer")
-                            aliveBoats.splice(validNamesPB, 1)
-                            console.log("Remaining Ships: ", aliveBoats)
-                        }
-                        break;
-                    case 'S':
-                        controlSubmarine ++;
-                        if (controlSubmarine == 3) {
-                            console.log("Submarine Sunk!!!! BOOOMMMMMMMMM")
-                            const validNamesPB = aliveBoats.indexOf("Submarine")
-                            aliveBoats.splice(validNamesPB, 1)
-                            console.log("Remaining Ships: ", aliveBoats)
-                        }
-                        break;
-                    case 'A':
-                        controlAircraft ++;
-                        if (controlAircraft == 5) {
-                            console.log("Aircraft Carrier Sunk!!!! BOOOMMMMMMMMM")
-                            const validNamesPB = aliveBoats.indexOf("Aircraft Carrier")
-                            aliveBoats.splice(validNamesPB, 1)
-                            console.log("Remaining Ships: ", aliveBoats)
-                        }
-                        break;
-                    case 'B':
-                        controlBattleship ++;
-                        if (controlBattleship == 4) {
-                            console.log("Battleship Sunk!!!! BOOOMMMMMMMMM")
-                            const validNamesPB = aliveBoats.indexOf("Battleship")
-                            aliveBoats.splice(validNamesPB, 1)
-                            console.log("Remaining Ships: ", aliveBoats)
-                        }
-                        break;
-                }                
-            } 
-            else {
-                console.log('Miss');
-            }
-            if (totalHits == 17) {
-                console.log("YOU WIN \n\n***********CONGRATULATIONS!***************\n\n")
-                process.exit();
-            }
-
-
                 console.log(`${playerColour}%s\x1b[0m`, "Yeah ! Nice hit !");
             } else {
                 this.showStartGameSplash();
                 console.log(`${playerColour}%s\x1b[0m`, "Miss");
             }
             console.log();
-
 
             const randomPosition = this.playerBoard.getRandomPosition();
             const isComputerHit = this.playerBoard.tryHitAShip(this.createShot(randomPosition));
@@ -253,26 +162,14 @@ export class Game {
                 this.showStartGameSplash();
             }
 
-
-            // console.log(`Computer shot in ${randomPosition} and ${isComputerHit ? 'has hit your ship !' : 'miss'}`);   
-
             console.log(`${computerColour}Computer shot in ${randomPosition} and ${isComputerHit ? 'has hit your ship !' : 'miss'}\x1b[0m`);
             console.log();
 
             
-            if (randomPosition && isComputerHit) {
-                totalComputerHits++
-                console.log("Computer has hit your ship!")
-                if (totalComputerHits == 17) {
-                    console.log("YOU LOSE \n\n***********GAME OVER***************\n\n")
-                    process.exit();
-                } 
-            }
         }
 
         rl.close();
     }
-
 }
 
 export async function playBattleFieldGame()  {
