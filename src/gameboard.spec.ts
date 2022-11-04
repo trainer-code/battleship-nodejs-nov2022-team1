@@ -90,7 +90,7 @@ describe('Gameboard', () => {
             { 'index': 4, 'isHit': false, 'letter': 'E', 'shipLetter': 'D' },
             { 'index': 5, 'isHit': false, 'letter': 'E', 'shipLetter': 'D' },
             { 'index': 6, 'isHit': false, 'letter': 'E', 'shipLetter': 'D' }]);
-    }); // cant pass test if we implement random?
+    });
 
     test('should initialise patrol boat individually', () => {
         // Act
