@@ -59,7 +59,7 @@ describe('Gameboard', () => {
         expect(sampleBoard).toEqual(computerGameBoard.serialiseBoard())
     });
 
-    test('should initialise aircraftCarrier individually', () => {
+    /*test('should initialise aircraftCarrier individually', () => {
         // Act
         computerGameBoard.initialiseShip(ShipLetter.A, 'B1, B2, B3, C3, D4', 5);
         // Assert
@@ -109,7 +109,7 @@ describe('Gameboard', () => {
             { 'index': 1, 'isHit': false, 'letter': 'A', 'shipLetter': 'S' },
             { 'index': 1, 'isHit': false, 'letter': 'B', 'shipLetter': 'S' },
             { 'index': 1, 'isHit': false, 'letter': 'C', 'shipLetter': 'S' }]);
-    });
+    });*/
 
 
     test('should throw error if ship string and size do not match', () => {
