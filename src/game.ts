@@ -155,6 +155,7 @@ export class Game {
         let controlAircraft = 0;
         let controlBattleship = 0;
         let totalHits = 0;
+        let totalComputerHits = 0;
         let aliveBoats = ["Patrol Boat", "Submarine", "Aircraft Carrier", "Battleship", "Destroyer"];
 
         while (true) {
@@ -227,7 +228,7 @@ export class Game {
                 console.log('Miss');
             }
             if (totalHits == 17) {
-                console.log("YOU WIN \n***********GAME OVER***************")
+                console.log("YOU WIN \n***********CONGRATULATIONS!***************")
                 process.exit();
             }
 
@@ -238,7 +239,16 @@ export class Game {
                 this.showHit();
             } 
 
-            console.log(`Computer shot in ${randomPosition} and ${isComputerHit ? 'has hit your ship !' : 'miss'}`);            
+            // console.log(`Computer shot in ${randomPosition} and ${isComputerHit ? 'has hit your ship !' : 'miss'}`);   
+            
+            if (randomPosition && isComputerHit) {
+                totalComputerHits++
+                console.log("Computer has hit your ship!")
+                if (totalComputerHits == 17) {
+                    console.log("YOU LOSE \n***********GAME OVER***************")
+                    process.exit();
+                } 
+            }
         }
 
         rl.close();
