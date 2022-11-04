@@ -49,55 +49,6 @@ export const isValidShotPosition = (positionStr: string) => {
   return positionStr.length === 2 && LETTERS.indexOf(positionStr[0].toUpperCase()) > -1 && Number(positionStr[1]) <= BOARD_SIZE;
 };
 
-export const isValidPosition = (positionStr: string, ships: GameBoardShips, firstCoord: string) => {
-  let validPosition = positionStr.length === 2 && LETTERS.indexOf(positionStr[0].toUpperCase()) > -1 && Number(positionStr[1]) <= BOARD_SIZE;
-  let noOverlap = true;
-  let sameAxis = positionStr.length === 2 ? positionStr[0] == firstCoord[0] || positionStr[1] == firstCoord[1] : false;
-
-  if (ships.aircraftCarrier.length > 0) {
-    ships.aircraftCarrier.forEach((ship) => {
-      if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
-        noOverlap = false;
-      }
-    });
-  }
-  
-  if (ships.battleship.length > 0) {
-    ships.battleship.forEach((ship) => {
-      if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
-        noOverlap = false;
-      }
-    });
-  }
-
-  if (ships.submarine.length > 0) {
-    ships.submarine.forEach((ship) => {
-      if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
-        noOverlap = false;
-      }
-    });
-  }
-
-  if (ships.destroyer.length > 0) {
-    ships.destroyer.forEach((ship) => {
-      if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
-        noOverlap = false;
-      }
-    });
-  }
-
-  if (ships.patrolBoat.length > 0) {
-    ships.patrolBoat.forEach((ship) => {
-      if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
-        noOverlap = false;
-      }
-    });
-  }
-
-
-  return validPosition && noOverlap && sameAxis;
-};
-
 export class GameBoard {
   ships: GameBoardShips = {
     aircraftCarrier: [],
@@ -107,6 +58,62 @@ export class GameBoard {
     patrolBoat: []
   };
   gameDimension = 8; // 8x8
+
+  isValidPosition (positionStr: string, firstCoord: string, prevCoord: string) {
+    let validPosition = positionStr.length === 2 && LETTERS.indexOf(positionStr[0].toUpperCase()) > -1 && Number(positionStr[1]) <= BOARD_SIZE;
+    let noOverlap = true;
+    let sameAxis = positionStr.length === 2 ? positionStr[0] == firstCoord[0] || positionStr[1] == firstCoord[1] : false;
+    let prevLetterCoord = String.fromCharCode(positionStr.charCodeAt(0)-1) + positionStr[1].toString();
+    let prevIndexCoord = positionStr[0] + (parseInt(positionStr[1])-1).toString();
+    let nextTo = prevCoord == "" ? true : prevCoord == prevLetterCoord || prevCoord == prevIndexCoord;
+  
+    // console.log(nextTo);
+    // console.log(prevLetterCoord);
+    // console.log(prevIndexCoord);
+
+    if (this.ships.aircraftCarrier.length > 0) {
+      this.ships.aircraftCarrier.forEach((ship) => {
+        if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
+          noOverlap = false;
+        }
+      });
+    }
+    
+    if (this.ships.battleship.length > 0) {
+      this.ships.battleship.forEach((ship) => {
+        if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
+          noOverlap = false;
+        }
+      });
+    }
+  
+    if (this.ships.submarine.length > 0) {
+      this.ships.submarine.forEach((ship) => {
+        if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
+          noOverlap = false;
+        }
+      });
+    }
+  
+    if (this.ships.destroyer.length > 0) {
+      this.ships.destroyer.forEach((ship) => {
+        if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
+          noOverlap = false;
+        }
+      });
+    }
+  
+    if (this.ships.patrolBoat.length > 0) {
+      this.ships.patrolBoat.forEach((ship) => {
+        if(ship.letter.toLowerCase() + ship.index.toString() == positionStr.toLowerCase()) {
+          noOverlap = false;
+        }
+      });
+    }
+  
+  
+    return validPosition && noOverlap && sameAxis && nextTo;
+  };
 
   parseShipPart(letterRow: number, i: number): ShipPart {
     return { letter: LETTERS[letterRow] as Letter, index: (i - (26 + letterRow * (this.gameDimension + 2) * 2)) / 2 + 1 };
@@ -216,13 +223,16 @@ export class GameBoard {
     }
 
     let firstCoord = shipPartPosition[0];
+    let prevCoord = "";
 
     const shipParts: Array<ShipPart> = shipPartPosition.map(el => {
-      if (!isValidPosition(el, this.ships, firstCoord)) {
+      if (!this.isValidPosition(el, firstCoord, prevCoord)) {
         throw Error('Invalid ship position');
       }
       const letter = el[0].toUpperCase() as Letter;
       const index = Number(el[1]);
+      //console.log(prevCoord);
+      prevCoord = letter.toLowerCase() + index.toString();
       return { letter, index, shipLetter, isHit: false };
     });
     this.ships[shipLetterToKeyMap[shipLetter]] = shipParts;
