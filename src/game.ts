@@ -167,7 +167,6 @@ export class Game {
             
             playerShotArray.push(shotPosition);
             if (isHit) {
-                console.log("hello")
                 const pos = this.computerBoard.getAllShipParts().find(l => l.letter == this.createShot(shotPosition).letter && l.index == this.createShot(shotPosition).index)
                 this.showHit();
 
@@ -228,7 +227,7 @@ export class Game {
                 console.log('Miss');
             }
             if (totalHits == 17) {
-                console.log("YOU WIN \n***********CONGRATULATIONS!***************")
+                console.log("YOU WIN \n\n***********CONGRATULATIONS!***************\n\n")
                 process.exit();
             }
 
@@ -245,7 +244,7 @@ export class Game {
                 totalComputerHits++
                 console.log("Computer has hit your ship!")
                 if (totalComputerHits == 17) {
-                    console.log("YOU LOSE \n***********GAME OVER***************")
+                    console.log("YOU LOSE \n\n***********GAME OVER***************\n\n")
                     process.exit();
                 } 
             }
