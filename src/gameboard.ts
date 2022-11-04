@@ -126,7 +126,7 @@ export class GameBoard {
   tryHitAShip(shot: Shot) {
     // Keeps track of shots taken
     const hitPart = this.getAllShipParts().find(el => el.letter === shot.letter && el.index === shot.index);
-    console.log(hitPart);
+    // console.log(hitPart);
     if (hitPart) {
       console.log("If statement");
       hitPart.isHit = true;
