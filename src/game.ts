@@ -1,4 +1,5 @@
 import * as readline from 'readline';
+const colors = require('colors');
 import { GameBoard, isValidPosition, computerBoard } from './gameboard';
 import { ShipLetter, Letter } from './enums';
 import { Shot } from './interfaces';
@@ -149,9 +150,9 @@ export class Game {
             const isHit = this.computerBoard.tryHitAShip(this.createShot(shotPosition));
             if (isHit) {
                 this.showHit();
-                console.log('Yeah ! Nice hit !');
+                console.log(colors.red('Yeah ! Nice hit !'));
             } else {
-                console.log('Miss');
+                console.log(colors.blue('Miss'));
             }
 
             const randomPosition = this.playerBoard.getRandomPosition();
@@ -160,7 +161,7 @@ export class Game {
                 this.showHit();
             } 
 
-            console.log(`Computer shot in ${randomPosition} and ${isComputerHit ? 'has hit your ship !' : 'miss'}`);
+            console.log(`Computer shot in ${randomPosition} and ${isComputerHit ? colors.red('has hit your ship !') : colors.blue('miss')}`);
 
             
         }
