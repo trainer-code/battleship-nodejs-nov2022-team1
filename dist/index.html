@@ -6,17 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="style.css">
     <title>
         Download all the things
     </title>
 </head>
 
-<body>
-    <p>You need to install <a href="https://nodejs.org/en/download/">nodejs</a> to run this game</p>
-    <a href="./battleship.tar.gz">download battleship game</a>
-    <p>After downloading the battleship game, write <strong>tar -zxvf battleship.tar.gz </strong> to extract the file to the current directory.
-    </p>
-    <p>Then run the following command in a terminal: <strong>node ./build/game</strong></p>
-</body>
+<img src="../battleship.png" style="width:50%; display: block; margin-left: auto; margin-right: auto;">
+
+    <div class="parent">
+        <div class="child">
+            <p>You need to install <a href="https://nodejs.org/en/download/">nodejs</a> to run this game</p>
+            <p><a href="./battleship.tar.gz">Click here </a> to download the battleship game.</p>
+            <p>After downloading the battleship game, write <strong>tar -zxvf battleship.tar.gz </strong> to extract the file to the current directory.
+            </p>
+            <p>Then run the following command in a terminal: <strong>node ./build/game</strong></p>
+            <p>For the full user guide on how to play, please <a href="../guide.pdf">click here.</a></p>
+        </div>
+
+        <div class="child">
+            <img src="../battleshipgif.gif" style="width:150%; display: block; margin-left: auto; margin-right: auto;">
+        </div>
+    </div>
+
 
 </html>
+
+
