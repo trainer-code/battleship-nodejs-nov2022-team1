@@ -1,7 +1,7 @@
 {
     "name": "trainingnode",
     "version": "1.0.0",
-    "description": "",
+    "description": "This is training code",
     "main": "index.js",
     "scripts": {
         "develop": "ts-node game",
