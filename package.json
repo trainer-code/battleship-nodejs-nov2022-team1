@@ -8,7 +8,9 @@
         "build": "tsc",
         "test": "jest",
         "start": "npm run build && node build/game",
-        "cucumber": "./node_modules/.bin/cucumber-js -p default"
+        "cucumber": "./node_modules/.bin/cucumber-js -p default",
+        "sonar": "node ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner",
+        "sonar-local": "node ./node_modules/sonarqube-scanner/dist/bin/sonar-scanner -D sonar.host.url=http://localhost:9000"
     },
     "author": "",
     "license": "ISC",
@@ -25,6 +27,7 @@
         "enzyme": "^3.11.0",
         "enzyme-to-json": "^3.4.4",
         "jest": "^25.1.0",
+        "sonarqube-scanner": "^2.7.0",
         "ts-jest": "^25.2.1",
         "ts-node": "^8.0.3",
         "typescript": "^3.8.3"

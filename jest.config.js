@@ -24,5 +24,18 @@ module.exports = {
         ".mock.ts",
         "<rootDir>/src/serviceWorker.ts",
         "mocks"
-    ]
+    ],
+    "coverageThreshold": {
+        "global": {
+          "branches": 1,
+          "functions": 5,
+          "lines": 5,
+          "statements": 5
+        }
+      },
+      "coverageReporters": [
+        "text",
+        "html",
+        "lcov"
+      ]
 };

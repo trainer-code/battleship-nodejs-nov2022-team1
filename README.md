@@ -45,3 +45,25 @@ npm install
 npm run test
 npm run start
 ```
+
+# Run sonarqube for typescript files
+
+You can run sonar by using
+```
+npm run sonar
+```
+This will require an external sonar service configured, such as http://sonar.mysite.com. You will see links to code quality at http://sonar.mysite.com/about
+
+But if you want to run it against a local sonar server, follow steps below
+
+## Step 1: Install sonarqube docker first
+```
+docker run -d --name sonarqube -p 9000:9000 sonarqube
+```
+## Step 2: run sonar-scanner for local docker sonar instance as
+```
+npm run sonar-local
+```
+
+You will see links to code quality at http://localhost:9000/about
+
