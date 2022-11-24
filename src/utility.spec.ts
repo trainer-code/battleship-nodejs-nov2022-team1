@@ -14,6 +14,14 @@ describe('Calculator', () => {
         expect(sum).toEqual(8);
     });
 
+    test('should subtract two numbers', () => {
+        // Act
+        const sum = myCalculator.subtract(3,5)
+
+        // Assert
+        expect(sum).toEqual(-2);
+    });
+
     test('should divide two numbers', () => {
         // Act
         const result = myCalculator.divide(10,2)
